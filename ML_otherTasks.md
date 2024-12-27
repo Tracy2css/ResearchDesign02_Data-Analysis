@@ -1,3 +1,35 @@
+20241227 Updated
+
+---
+
+| **Performance Type** | **Physiological Measures**           | **Indication for Sensory Comfort**                                                                                                                                       | **Related Cognitive Performances**                                |
+|-----------------------|-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| **EEG**              | - Alpha waves (8-12 Hz)<br>- Beta waves (13-30 Hz)<br>- Theta waves (4-8 Hz) | - **Increased alpha waves**: Indicates relaxation, associated with **visual comfort** or reduced sensory stress.<br>- **Beta suppression**: May reflect sensory overload or discomfort.<br>- **Theta waves**: Linked to thermal discomfort or fatigue. | - **Attention and Concentration**: Higher beta activity indicates better sustained attention.<br>- **Working Memory**: Increased theta during memory tasks.<br>- **Executive Function**: High frontal theta associated with decision-making. |
+| **Heart Rate (HR)**  | - Heart Rate Variability (HRV)<br>- Heart Rate (HR)                      | - **Higher HRV**: Indicates lower stress and **thermal comfort**.<br>- **Elevated HR**: Signals auditory or visual discomfort, particularly due to sudden stimuli.                                         | - **Processing Speed**: Faster responses may correlate with higher HRV.<br>- **Executive Function**: Higher HRV suggests better adaptability and control. |
+| **Skin Conductance Level (SCL)** | - GSR (Galvanic Skin Response)<br>- Skin Conductance Level (SCL) | - **Increased SCL**: Indicates sensory discomfort or stress, often in response to auditory or visual changes.<br>- **Stable SCL**: Suggests **visual and auditory comfort**.                             | - **Attention and Concentration**: Peaks in SCL indicate response to challenging tasks.<br>- **Processing Speed**: Lower SCL fluctuations during simple tasks. |
+
+---
+
+| **Aspect**                 | **With LSL Synchronisation**                                    | **Without LSL Synchronisation**                             |
+|----------------------------|---------------------------------------------------------------|------------------------------------------------------------|
+| **Experimental Preparation** | - Easy integration of multiple devices.<br>- Time-synchronisation setup ensures aligned data streams.<br>- Requires basic LSL framework setup. | - Manual setup for each device.<br>- Higher risk of misaligned data.<br>- Increased preparation complexity for multi-device coordination. |
+| **Data Collection Convenience** | - Automatic time-stamping ensures accurate synchronisation.<br>- Reduces risk of data loss or mismatched streams.<br>- Supports continuous, real-time monitoring. | - Requires manual effort to align timestamps.<br>- Risk of data gaps or overlaps.<br>- Real-time monitoring limited to individual device streams. |
+| **Data Analysis Efficiency**  | - Aligned data ready for immediate analysis.<br>- Compatible with time-sensitive methods (e.g., LSTM).<br>- Minimises preprocessing effort. | - Requires extensive preprocessing to align data.<br>- Errors in synchronisation may affect temporal analysis.<br>- Time-consuming for large datasets. |
+| **Reliability of Results**    | - High temporal accuracy for event-response analysis.<br>- Facilitates robust multimodal correlations. | - Lower temporal accuracy.<br>- Difficult to draw precise event-response relationships.<br>- Increased potential for analytical errors. |
+
+---
+.
+
+| **Prediction Stage**           | **Data Elements**                   | **AI/ML Methods**                       | **Purpose**                                              | **Expected Outputs**                                              | **Expected Design Optimisation**                                  |
+|--------------------------------|------------------------------------|----------------------------------------|---------------------------------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------|
+| **1. Baseline Analysis**       | - Comfort Ratings (subjective)<br>- Task Performance (accuracy) | **GLM (Generalised Linear Model)**      | Identify **linear incremental effects** of sensory adjustments relative to visual-only (VA) baseline. | - Incremental effects (p-values, R²)<br>- Effect comparison of VAA, VTA, MSA vs. VA baseline. | - Define baseline sensory conditions for comfort and efficiency.<br>- Identify if single sensory adjustments (e.g., auditory or thermal) are sufficient or if combinations are needed. |
+| **2. Feature Importance**      | - Physiological Data:<br>  - EEG, HR, GSR<br>- Sensory Adjustments | **Random Forest (RF)**                  | Determine **most important features** influencing comfort and task performance. | - Feature importance plot showing key predictors (EEG, HR, GSR). | - Prioritise adjustments that significantly improve comfort |
+| **3. Complex Non-Linear Analysis** | - Physiological Data<br>- Subjective Feedback<br>- Sensory Adjustments | **RF, SVM, ANN (regression)**           | Predict comfort and task efficiency under **non-linear relationships** between data. | - Predicted comfort/task scores.<br>- Prediction errors (MSE/MAE). | - Optimise **material selections** (e.g., matte or textured finishes) to minimise visual distractions.<br>- Implement dynamic soundscaping systems for improved auditory focus.<br>- Individual thermal controllers for personalised thermal comfort zones. |
+| **4. Temporal Prediction**     | - Time-Series Data:<br>  - EEG, HR, GSR over time<br>  - Sequential Sensory Adjustments | **LSTM (Long Short-Term Memory)**       | Predict **dynamic changes** in comfort and performance over time based on physiological data. | - Time-series comfort/task performance predictions.<br>- Accuracy metrics (MSE/MAE). | - Develop real-time **adaptive systems** that adjust lighting intensity, soundscaping, or thermal conditions based on user comfort and task needs over time. |
+| **5. Model Integration [Optimised Prediction Systems]**       | - Outputs of LSTM, RF, ANN, SVM    | **Weighted Averaging (Ensemble)**       | Combine predictions for a robust **final comfort/task score**. | - Final weighted prediction for comfort/task performance. | - Implement a **holistic adaptive system** integrating visual, auditory, and thermal adjustments for continuous comfort optimisation.
+
+---
+
 ## **AI/ML for Data Analysis**
 
 ### **Data Types and Collection**
@@ -6,13 +38,13 @@
 
 #### **2. Objective Data**
 - **Physiological Performance**
-  - **EEG data**
-  - **Heart rate (HR)**
-  - **Galvanic skin response (GSR)**
+  - EEG data
+  - PPG: Heart rate (HR)
+  - Galvanic skin response (GSR)
 - **Physical Movement**
-  - **Head movement**
+  - Head movement
 - **Task Performance**
-  - **accuracy of cognition test**
+  - Accuracy of cognition test
 
 ---
 
@@ -20,7 +52,7 @@
 
 #### 1. Quantifying Additional Effects
 ##### **Use Case**:
-Generalised Linear Models (GLM) can be used to identify linear incremental effects (p-values and R² Coefficient of Determination) compared to a baseline (or control condition). 
+Generalised Linear Models (GLM) can be used to identify ==linear incremental effects== (p-values and R² Coefficient of Determination) compared to a baseline. 
 
 - **Objective**: determine how different combinations of sensory adjustments contribute to the outcomes, such as physiological responses, task performance, or comfort levels, in comparison to the baseline.
 
@@ -36,12 +68,12 @@ Generalised Linear Models (GLM) can be used to identify linear incremental effec
 #### **2. RF/SVM Regression/ANN non-linear relationship prediction**
 
 ##### **Use Case**:
-Random forest is useful for handling complex, **non-linear relationships** between **physiological data** (EEG, HR, GSR) and **subjective feedback** (comfort, task performance).
+Handling complex, ==**non-linear relationships**== between **physiological data** (EEG, HR, GSR) and **subjective feedback** (comfort, task performance).
 
 - **Objective**: Predict participant comfort or task performance based on physiological data and multiple sensory adjustments.
 
 ##### **Model**:
-- **RF/ANN** builds multiple decision trees to predict the relationship between the independent variables (EEG, HR, GSR, sensory conditions) and the dependent variable (comfort or task efficiency).
+- **RF/SVM/ANN** predict the relationship between the independent variables (EEG, HR, GSR, sensory conditions) and the dependent variable (comfort or task efficiency).
   - **Input Features**: Physiological data (EEG, HR, GSR), sensory conditions (VA/VAA/MSA).
   - **Target**: Comfort scores, task performance.
 
@@ -78,7 +110,7 @@ LSTM (Long Short-Term Memory) is ideal for handling **time-series data** and cap
      \]
      Repeat the same for ANN, RF, and SVM to get \( w_{\text{ANN}} \), \( w_{\text{RF}} \), and \( w_{\text{SVM}} \).
 
-3. **Calculate the final weighted average prediction**:
+3. **Calculate the ==final weighted average prediction==**:
 
    - **Weighted average formula**:
      \[
@@ -86,8 +118,8 @@ LSTM (Long Short-Term Memory) is ideal for handling **time-series data** and cap
      \]
 
 #### 5. Applications of the Final Prediction
-Based on the **final prediction** from the weighted averaging of **LSTM**, **ANN**, **RF**, and **SVM** can be used in **Unity VR interactions** or in **real-world customised/adaptive design**:
-##### Adding a system in VR interactions:
+The **final prediction** from the weighted averaging of **LSTM**, **ANN**, **RF**, and **SVM** can be used in **Unity VR interactions** or in **real-world customised/adaptive design**:
+##### Adding a ==implication system== in VR interactions:
 The system displays real-time feedback in the form of comfort prediction and cognitive performance implications based on the input physiological performance:
 - Comfort Prediction: A bar or gauge that shows the predicted comfort level on a scale (e.g., “Comfort: 80% optimal”).
 - Cognitive Performance Implication: A brief message or visual indicator (e.g., “Focus: Improved by 15%” or “Task efficiency: Likely to decrease”). 
